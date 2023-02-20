@@ -1,0 +1,16 @@
+<h2>Books</h2>
+<app-book-list class="book-list" [books]="(books$ | async)!" (add)="onAdd($event)"></app-book-list>
+
+<h2>My Collection</h2>
+<ng-container *ngIf="(totalBookCollection$ | async) as totalBookCollection">
+    <span *ngIf="totalBookCollection > 0; else noFound">
+        <b>{{ totalBookCollection }}</b> 
+        books founded
+    </span>
+</ng-container>
+<app-book-collection class="book-collection" [books]="(bookCollection$ | async)!" (remove)="onRemove($event)">
+</app-book-collection>
+
+<ng-template #noFound>
+    <p>No books aggregated yet</p>
+</ng-template>
